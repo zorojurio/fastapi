@@ -1,7 +1,10 @@
 from fastapi import FastAPI
 
-from blog import schemas
+from . import models, schemas
+from .database import engine
 
+models.Base.metadata.create_all(bind=engine)
+print("creating")
 app = FastAPI()
 
 
