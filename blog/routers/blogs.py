@@ -1,10 +1,12 @@
 from typing import List
 
-from fastapi import APIRouter, status, Depends, HTTPException
+from fastapi import APIRouter, status, Depends
 from sqlalchemy.orm import Session
 
-from .. import database, models, schemas
+from .. import database, schemas
+from .. import outh2
 from ..repository import blogs
+
 router = APIRouter(
     prefix="/blog",
     tags=['blogs'],
@@ -19,7 +21,7 @@ def create(request: schemas.Blog, db: Session = Depends(get_db)):
 
 
 @router.get('/', response_model=List[schemas.ShowBlog])
-def all_blogs(db: Session = Depends(get_db)):
+def all_blogs(db: Session = Depends(get_db), current_user: schemas.User = Depends(outh2.get_current_user)):
     return blogs.get_all(db=db)
 
 
