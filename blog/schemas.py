@@ -19,19 +19,22 @@ class User(BaseModel):
     email: str
 
 
-class UserOut(BaseModel):
+class UserOutBase(BaseModel):
     username: str
     email: str
-    blogs: List[Blog]
 
     class Config:
         orm_mode = True
 
 
+class UserOut(UserOutBase):
+    blogs: List[Blog]
+
+
 class ShowBlog(BaseModel):
     title: str
     body: str
-    creator: UserOut
+    creator: UserOutBase
 
     class Config:
         orm_mode = True

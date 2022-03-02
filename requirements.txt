@@ -1,0 +1,5 @@
+fastapi~=0.74.1
+SQLAlchemy~=1.4.31
+passlib~=1.7.4
+pydantic~=1.9.0
+uvicorn~=0.15.0
